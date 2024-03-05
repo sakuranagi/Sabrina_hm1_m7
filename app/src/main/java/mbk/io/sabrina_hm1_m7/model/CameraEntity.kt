@@ -8,9 +8,9 @@ import java.io.Serializable
 data class CameraEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int ?=null,
-    val favorites: Boolean,
-    val name: String,
-    val rec: Boolean,
-    val room: String,
-    val snapshot: String
+    val favorites: Boolean?=false,
+    val name: String?="",
+    val rec: Boolean?=false,
+    val room: String?="",
+    val snapshot: String?=""
 ):Serializable

@@ -1,6 +1,7 @@
 package mbk.io.sabrina_hm1_m7.ui.doors
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -57,20 +58,22 @@ class DoorFragment : BaseFragment() {
         viewModel.getCameras().stateHandler(
             success = { it ->
                 val list = it.data
+                Log.e("ololo", "List of doorModels: ${list.toString()}")
                 CoroutineScope(Dispatchers.IO).launch {
-                App.db.doorDao().clearAll()
-                list.forEach {
-                    val door = DoorEntity(
-                        favorites = it.favorites,
-                        name = it.name,
-                        room = it.room,
-                        snapshot = it.snapshot
-                    )
-                    CoroutineScope(Dispatchers.IO).launch {
+                    App.db.doorDao().clearAll()
+                    list.forEach {
+                        val door = DoorEntity(
+                            favorites = it.favorites,
+                            name = it.name,
+                            room = it.room,
+                            snapshot = it.snapshot
+                        )
+                        Log.e("ololo", "door: ${door.toString()}")
                         App.db.doorDao().insertDoor(door)
+
                     }
-                }
                     val listDB = App.db.doorDao().getAll()
+                    Log.e("ololo", "List of doorEntiies: ${listDB.toString()}")
                     withContext(Dispatchers.Main) {
                         adapter.submitList(listDB)
                         adapter.notifyDataSetChanged()

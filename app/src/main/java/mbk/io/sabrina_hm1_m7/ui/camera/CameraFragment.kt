@@ -1,6 +1,7 @@
 package mbk.io.sabrina_hm1_m7.ui.camera
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,6 +59,7 @@ class CameraFragment : BaseFragment() {
         viewModel.getCameras().stateHandler(
             success = { it ->
                 val list = it.data.cameras
+                Log.e("ololo", "List of cameraModels: ${list.toString()}")
                 CoroutineScope(Dispatchers.IO).launch {
                     App.db.cameraDao().clearAll()
                     list.forEach {
@@ -68,10 +70,12 @@ class CameraFragment : BaseFragment() {
                             room = it.room,
                             snapshot = it.snapshot
                         )
+                        Log.e("ololo", "camera : ${camera.toString()}")
                         App.db.cameraDao().insertCamera(camera)
                     }
                     withContext(Dispatchers.Main) {
                         val listDB = App.db.cameraDao().getAll()
+                        Log.e("ololo", "List of cameraEntiies: ${listDB.toString()}")
                         adapter.submitList(listDB)
                         adapter.notifyDataSetChanged()
                     }
