@@ -1,8 +1,7 @@
-package mbk.io.sabrina_hm1_m7.ui.doors
+package mbk.io.sabrina_hm1_m7.presentation.ui.doors
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,14 +14,13 @@ import kotlinx.coroutines.withContext
 import mbk.io.sabrina_hm1_m7.app.App
 import mbk.io.sabrina_hm1_m7.base.BaseFragment
 import mbk.io.sabrina_hm1_m7.databinding.FragmentDoorBinding
-import mbk.io.sabrina_hm1_m7.model.CameraEntity
-import mbk.io.sabrina_hm1_m7.model.DoorEntity
-import mbk.io.sabrina_hm1_m7.ui.doors.adapter.DoorAdapter
+import mbk.io.sabrina_hm1_m7.data.local.models.DoorEntity
+import mbk.io.sabrina_hm1_m7.presentation.ui.doors.adapter.DoorAdapter
 
 @AndroidEntryPoint
 class DoorFragment : BaseFragment() {
     private lateinit var binding: FragmentDoorBinding
-    private val viewModel: DoprViewModel by viewModels()
+    private val viewModel: DoorViewModel by viewModels()
     private val adapter = DoorAdapter(true)
     private var list: List<DoorEntity> = mutableListOf()
 
@@ -38,7 +36,7 @@ class DoorFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.rvCameras.adapter = adapter
         CoroutineScope(Dispatchers.IO).launch {
-            list = App.db.doorDao().getAll()
+            list = viewModel.getDBDoors()
             withContext(Dispatchers.Main) {
                 if (list.isEmpty()) {
                     getData()
@@ -55,12 +53,11 @@ class DoorFragment : BaseFragment() {
     }
 
     fun getData() {
-        viewModel.getCameras().stateHandler(
+        viewModel.getDoors().stateHandler(
             success = { it ->
                 val list = it.data
-                Log.e("ololo", "List of doorModels: ${list.toString()}")
                 CoroutineScope(Dispatchers.IO).launch {
-                    App.db.doorDao().clearAll()
+                    viewModel.clearAll()
                     list.forEach {
                         val door = DoorEntity(
                             favorites = it.favorites,
@@ -68,12 +65,10 @@ class DoorFragment : BaseFragment() {
                             room = it.room,
                             snapshot = it.snapshot
                         )
-                        Log.e("ololo", "door: ${door.toString()}")
-                        App.db.doorDao().insertDoor(door)
+                        viewModel.insert(door)
 
                     }
-                    val listDB = App.db.doorDao().getAll()
-                    Log.e("ololo", "List of doorEntiies: ${listDB.toString()}")
+                    val listDB = viewModel.getDBDoors()
                     withContext(Dispatchers.Main) {
                         adapter.submitList(listDB)
                         adapter.notifyDataSetChanged()

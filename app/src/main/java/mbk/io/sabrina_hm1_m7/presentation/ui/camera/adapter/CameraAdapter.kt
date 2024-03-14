@@ -1,4 +1,4 @@
-package mbk.io.sabrina_hm1_m7.ui.camera.adapter
+package mbk.io.sabrina_hm1_m7.presentation.ui.camera.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import mbk.io.sabrina_hm1_m7.databinding.ItemCameraBinding
-import mbk.io.sabrina_hm1_m7.model.CameraEntity
+import mbk.io.sabrina_hm1_m7.data.local.models.CameraEntity
 
 class CameraAdapter(private val isDoor : Boolean) :
     ListAdapter<CameraEntity, RecyclerViewHolder>(CameraDiffUtil()) {

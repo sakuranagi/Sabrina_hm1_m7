@@ -1,11 +1,11 @@
-package mbk.io.sabrina_hm1_m7
+package mbk.io.sabrina_hm1_m7.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import mbk.io.sabrina_hm1_m7.databinding.ActivityMainBinding
-import mbk.io.sabrina_hm1_m7.ui.adapters.VPAdapter
+import mbk.io.sabrina_hm1_m7.presentation.ui.adapter.VPAdapter
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

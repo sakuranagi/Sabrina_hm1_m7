@@ -1,4 +1,4 @@
-package mbk.io.sabrina_hm1_m7.model
+package mbk.io.sabrina_hm1_m7.data.local.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -12,5 +12,6 @@ data class CameraEntity(
     val name: String?="",
     val rec: Boolean?=false,
     val room: String?="",
-    val snapshot: String?=""
+    val snapshot: String?="",
+
 ):Serializable

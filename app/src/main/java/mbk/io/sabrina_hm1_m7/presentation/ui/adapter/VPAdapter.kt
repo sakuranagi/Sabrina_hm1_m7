@@ -1,11 +1,11 @@
-package mbk.io.sabrina_hm1_m7.ui.adapters
+package mbk.io.sabrina_hm1_m7.presentation.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import mbk.io.sabrina_hm1_m7.ui.camera.CameraFragment
-import mbk.io.sabrina_hm1_m7.ui.doors.DoorFragment
+import mbk.io.sabrina_hm1_m7.presentation.ui.camera.CameraFragment
+import mbk.io.sabrina_hm1_m7.presentation.ui.doors.DoorFragment
 
 class VPAdapter (
     private val fragmentManager: FragmentManager,

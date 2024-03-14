@@ -1,4 +1,4 @@
-package mbk.io.sabrina_hm1_m7.ui.camera
+package mbk.io.sabrina_hm1_m7.presentation.ui.camera
 
 import android.os.Bundle
 import android.util.Log
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,8 +15,8 @@ import kotlinx.coroutines.withContext
 import mbk.io.sabrina_hm1_m7.app.App
 import mbk.io.sabrina_hm1_m7.base.BaseFragment
 import mbk.io.sabrina_hm1_m7.databinding.FragmentCameraBinding
-import mbk.io.sabrina_hm1_m7.model.CameraEntity
-import mbk.io.sabrina_hm1_m7.ui.camera.adapter.CameraAdapter
+import mbk.io.sabrina_hm1_m7.data.local.models.CameraEntity
+import mbk.io.sabrina_hm1_m7.presentation.ui.camera.adapter.CameraAdapter
 
 @AndroidEntryPoint
 class CameraFragment : BaseFragment() {
@@ -37,7 +38,7 @@ class CameraFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.rvCameras.adapter = adapter
         CoroutineScope(Dispatchers.IO).launch {
-            list = App.db.cameraDao().getAll()
+            list = viewModel.getDBCameras()
             withContext(Dispatchers.Main) {
                 if (list.isEmpty()) {
                     getData()
@@ -59,9 +60,8 @@ class CameraFragment : BaseFragment() {
         viewModel.getCameras().stateHandler(
             success = { it ->
                 val list = it.data.cameras
-                Log.e("ololo", "List of cameraModels: ${list.toString()}")
                 CoroutineScope(Dispatchers.IO).launch {
-                    App.db.cameraDao().clearAll()
+                    viewModel.clearAll()
                     list.forEach {
                         val camera = CameraEntity(
                             favorites = it.favorites,
@@ -70,12 +70,10 @@ class CameraFragment : BaseFragment() {
                             room = it.room,
                             snapshot = it.snapshot
                         )
-                        Log.e("ololo", "camera : ${camera.toString()}")
-                        App.db.cameraDao().insertCamera(camera)
+                       viewModel.insertCamera(camera)
                     }
                     withContext(Dispatchers.Main) {
-                        val listDB = App.db.cameraDao().getAll()
-                        Log.e("ololo", "List of cameraEntiies: ${listDB.toString()}")
+                        val listDB = viewModel.getDBCameras()
                         adapter.submitList(listDB)
                         adapter.notifyDataSetChanged()
                     }

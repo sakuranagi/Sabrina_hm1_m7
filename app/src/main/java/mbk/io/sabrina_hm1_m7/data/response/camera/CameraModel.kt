@@ -1,4 +1,4 @@
-package mbk.io.sabrina_hm1_m7.model
+package mbk.io.sabrina_hm1_m7.data.response.camera
 
 data class CameraModel(
     val `data`: Data,

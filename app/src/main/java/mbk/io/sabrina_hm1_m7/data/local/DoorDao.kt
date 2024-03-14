@@ -1,9 +1,10 @@
 package mbk.io.sabrina_hm1_m7.data.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import mbk.io.sabrina_hm1_m7.model.DoorEntity
+import mbk.io.sabrina_hm1_m7.data.local.models.DoorEntity
 @Dao
 interface DoorDao {
 

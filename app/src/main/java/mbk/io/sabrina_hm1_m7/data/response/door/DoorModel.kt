@@ -1,4 +1,4 @@
-package mbk.io.sabrina_hm1_m7.model
+package mbk.io.sabrina_hm1_m7.data.response.door
 
 data class DoorModel(
     val `data`: List<Data>,

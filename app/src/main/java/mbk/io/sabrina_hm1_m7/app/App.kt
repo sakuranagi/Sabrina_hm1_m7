@@ -7,7 +7,7 @@ import mbk.io.sabrina_hm1_m7.data.local.AppDatabase
 
 @HiltAndroidApp
 class App : Application() {
-    override fun onCreate() {
+ /*   override fun onCreate() {
         super.onCreate()
         db = Room.databaseBuilder(
             applicationContext,
@@ -18,5 +18,5 @@ class App : Application() {
 
     companion object {
         lateinit var db: AppDatabase
-    }
+    }*/
 }

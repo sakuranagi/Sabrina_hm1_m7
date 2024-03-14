@@ -1,13 +1,12 @@
 package mbk.io.sabrina_hm1_m7.base
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import mbk.io.sabrina_hm1_m7.data.AppApiService
+import mbk.io.sabrina_hm1_m7.data.remote.AppApiService
 import mbk.io.sabrina_hm1_m7.data.Resource
 
-abstract class BaseRepository (private val api: AppApiService){
+abstract class BaseRepository(){
     fun <T> apiRequest(apiCall: suspend () -> T): LiveData<Resource<T>> =
         liveData(Dispatchers.Main) {
             emit(Resource.Loading())
