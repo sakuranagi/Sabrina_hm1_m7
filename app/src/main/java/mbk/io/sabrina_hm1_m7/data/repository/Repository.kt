@@ -29,6 +29,7 @@ class Repository @Inject constructor(private val api: AppApiService, private val
     override suspend fun getDBCameras(): List<CameraEntity> = db.cameraDao().getAll()
 
     override suspend fun clearAll() = db.cameraDao().clearAll()
+    override suspend fun deleteCamera(cameraEntity: CameraEntity) = db.cameraDao().delete(cameraEntity)
 
 
     override suspend fun insert(cameraEntity: CameraEntity) =
@@ -36,6 +37,9 @@ class Repository @Inject constructor(private val api: AppApiService, private val
 
 
     override suspend fun insert(doorEntity: DoorEntity) = db.doorDao().insertDoor(doorEntity)
+    override suspend fun deleteDoor(doorEntity: DoorEntity) {
+        db.doorDao().deleteDoor(doorEntity)
+    }
 
     override suspend fun getDBDoors(): List<DoorEntity> = db.doorDao().getAll()
     override suspend fun clearAllDoors() = db.doorDao().clearAll()

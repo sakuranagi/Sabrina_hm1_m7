@@ -15,4 +15,6 @@ class GetDoorUseCase @Inject constructor(private val doorsRepository: DoorsRepos
     suspend fun insert(doorEntity: DoorEntity) = doorsRepository.insert(doorEntity)
     suspend fun clearAll() = doorsRepository.clearAllDoors()
 
+    suspend fun deleteDoor(doorEntity: DoorEntity) = doorsRepository.deleteDoor(doorEntity)
+
 }

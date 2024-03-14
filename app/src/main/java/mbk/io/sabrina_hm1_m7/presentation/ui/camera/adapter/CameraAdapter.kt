@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import mbk.io.sabrina_hm1_m7.databinding.ItemCameraBinding
 import mbk.io.sabrina_hm1_m7.data.local.models.CameraEntity
+import mbk.io.sabrina_hm1_m7.presentation.ui.camera.CameraViewModel
 
-class CameraAdapter(private val isDoor : Boolean) :
+class CameraAdapter(private val isDoor: Boolean) :
     ListAdapter<CameraEntity, RecyclerViewHolder>(CameraDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder =
         RecyclerViewHolder(
@@ -21,6 +22,7 @@ class CameraAdapter(private val isDoor : Boolean) :
             ), isDoor
 
         )
+
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -77,9 +79,11 @@ class RecyclerViewHolder(private var binding: ItemCameraBinding, private val isD
 }
 
 class CameraDiffUtil : DiffUtil.ItemCallback<CameraEntity>() {
-    override fun areItemsTheSame(oldItem: CameraEntity, newItem: CameraEntity)= oldItem.id == newItem.id
+    override fun areItemsTheSame(oldItem: CameraEntity, newItem: CameraEntity) =
+        oldItem.id == newItem.id
 
 
-    override fun areContentsTheSame(oldItem: CameraEntity, newItem: CameraEntity) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: CameraEntity, newItem: CameraEntity) =
+        oldItem == newItem
 
 }

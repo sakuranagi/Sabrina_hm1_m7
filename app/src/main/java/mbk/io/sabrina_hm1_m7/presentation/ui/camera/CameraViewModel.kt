@@ -18,5 +18,6 @@ class CameraViewModel @Inject constructor(private val cameraUseCase: GetCameraUs
 
     suspend fun clearAll() = cameraUseCase.clearAll()
 
+    suspend fun deleteCamera(cameraEntity: CameraEntity) = cameraUseCase.deleteCamera(cameraEntity)
     suspend fun insertCamera(cameraEntity: CameraEntity) = cameraUseCase.insert(cameraEntity)
 }

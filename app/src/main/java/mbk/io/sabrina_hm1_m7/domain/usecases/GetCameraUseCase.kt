@@ -14,5 +14,7 @@ class GetCameraUseCase @Inject constructor(private val camerasRepository: Camera
 
     suspend fun clearAll() = camerasRepository.clearAll()
 
+    suspend fun deleteCamera(cameraEntity: CameraEntity) = camerasRepository.deleteCamera(cameraEntity)
+
     suspend fun insert(cameraEntity: CameraEntity) = camerasRepository.insert(cameraEntity)
 }

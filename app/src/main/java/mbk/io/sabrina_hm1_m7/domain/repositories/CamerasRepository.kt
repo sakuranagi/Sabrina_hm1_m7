@@ -9,6 +9,7 @@ interface CamerasRepository {
     fun getCameras(): LiveData<Resource<CameraModel>>
    suspend fun  getDBCameras():List<CameraEntity>
    suspend fun clearAll()
+   suspend fun deleteCamera(cameraEntity: CameraEntity)
 
    suspend fun insert(cameraEntity: CameraEntity)
 }

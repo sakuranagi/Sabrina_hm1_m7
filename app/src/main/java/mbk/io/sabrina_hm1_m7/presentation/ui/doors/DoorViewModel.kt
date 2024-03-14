@@ -16,6 +16,7 @@ class DoorViewModel @Inject constructor(private val doorUseCase: GetDoorUseCase)
 
     suspend fun getDBDoors(): List<DoorEntity> = doorUseCase.getDBDoors()
 
+    suspend fun deleteDoor(doorEntity: DoorEntity) = doorUseCase.deleteDoor(doorEntity)
 
     suspend fun clearAll() = doorUseCase.clearAll()
 

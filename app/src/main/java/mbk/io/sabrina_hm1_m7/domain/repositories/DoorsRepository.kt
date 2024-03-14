@@ -13,4 +13,5 @@ interface DoorsRepository {
     suspend fun clearAllDoors()
 
     suspend fun insert(doorEntity: DoorEntity)
+    suspend fun deleteDoor(doorEntity: DoorEntity)
 }
